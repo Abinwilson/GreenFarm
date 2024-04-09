@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div style="margin-top:110px;margin-bottom:200px;">
+    <div class="row">
+        <div class="col-sm-4 p-2" style="margin-left:30px;">
+            <img src="{{p.image.url}}" height="550px" width="500px">
+        </div>
+        <div class="col-sm-6" style="margin-bottom:30px;padding-top:30px;margin-left:70px;;">
+            <h3 class="card-title">{{p.name}}</h3><br>
+            <h5 class="card-text">{{p.price}} Rs</h5><br>
+            <h5>{{p.stock}} items</h5><br>
+            <h6 class="card-text" style="line-height:1.8;text-indent:20px;text-align:left;">{{p.desc}}</h6>
+            {% if user.is_superuser == False %}
+
+
+            {% if p.stock <= 0 %}
+            <h4 style="color:red;text:center">Out of Stock</h4>
+            {% else %}
+            <h4><a href="{% url 'cart:addtocart' p.name %}" class="btn btn-primary" style="position:relative;left:5%;margin-top:30px;">ADD TO CART</a></h4>
+            {% endif %}
+
+
+            {% else %}
+
+
+            {% if p.stock <= 0 %}
+            <h4 style="color:red;">Out of Stock</h4>
+            <h4><a href="{% url 'admin:index' %}" class="btn btn-warning" style="position:relative;left:5%;margin-top:30px;">Add Stock</a></h4>
+            {% else %}
+            <h4 style="color:green;margin-top:20px;">Product in Stock</h4>
+            <h4><a href="{% url 'admin:index' %}" class="btn btn-primary" style="position:relative;left:5%;margin-top:30px;">Add Stock</a></h4>
+            {% endif %}
+
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

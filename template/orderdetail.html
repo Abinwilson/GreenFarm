@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container-fluid" style="margin-top:130px;margin-bottom:500px;">
+<center>
+    <h3 class="text-center text-secondary">{{msg}}</h3>
+    <h4 class="text-center text-success">Thank You....</h4>
+    <a href="{% url 'shop:home' %}">Continue Shopping</a>
+</center>
+</div>
+{% endblock %}
